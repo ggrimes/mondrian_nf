@@ -42,7 +42,7 @@ workflow MONDRIAN_QC{
     main:
 
     fastqs_data = Channel
-               .fromPath(fastqs)
+               .fromPath(fastqs,checkIfExists:true)
                .splitCsv(header:true, sep:',')
 
     lanes = fastqs_data.map{row -> tuple(row.cellid, row.laneid)}.groupTuple(by: 0)
